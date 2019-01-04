@@ -4,6 +4,11 @@
 
 from modelado.mimodelo import *
 from paquete_archivos.miarchivo import *
+from interfaz.menu import *
+
+
+# Objeto que contiene la interfaz
+interfaz = Menu()
 
 # Objeto para leer el archivo de informacion.csv
 archivo = MiArchivo()
@@ -28,20 +33,29 @@ for dato in informacion:
 
 # Creamos un objeto operacion
 operacion = Operaciones(lista_equipos)
+
+# Presenta el menu y devuelve una opcion
+op = interfaz.menuPrincipal()
+
 # Sobreescribimos la lista_equipos con su version ordenada
 # usando el metodo de ordenar de la clase Operaciones
-lista_equipos = operacion.ordenar()
+lista_equipos = operacion.ordenar(op)
+
+# Mensaje que avisa del tipo de ordenamiento
+mensaje = "Equipos ordenados por %s:\n" % (op)
 
 # Bloque para imprimir en consola el resultado
-print("\nEquipos ordenados por nombre:")
+print('\n%s' % mensaje)
 for equipo in lista_equipos:
     print(equipo)
 print()
 # Fin bloque
 
 # Por cada Equipo en la lista se escribe una linea en el nuevo archivo
+archivoNuevo.agregar_linea(mensaje)
 for equipo in lista_equipos:
     archivoNuevo.agregar_informacion(equipo)
+archivoNuevo.agregar_linea('\n')
 
 # Cerramos el archivo informacion2.csv
 archivoNuevo.cerrar_archivo()

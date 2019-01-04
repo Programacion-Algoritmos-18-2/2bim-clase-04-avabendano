@@ -33,6 +33,10 @@ class MiArchivoEscribir:
         self.archivo.write("%s|%s|%d|%d\n" % (
             equipo.nombres, equipo.ciudad, equipo.campeonatos, equipo.numJugadores))
 
+    # Metodo que escribe un texto en el archivo
+    def agregar_linea(self, texto):
+        self.archivo.write(texto)
+
     # Metodo que cierra la escritura del archivo
     def cerrar_archivo(self):
         self.archivo.close()
